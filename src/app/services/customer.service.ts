@@ -1,17 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Product } from '../model/product';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
-  url:string="http://localhost:8888/INVENTORY-SERVICE/products"
+export class CustomerService {
 
+  url:string="http://localhost:8888/CUSTOMER-SERVICE/customers"
   constructor(private http:HttpClient) { }
 
-  getAllProducts() : Observable<Array<any>> {
+  getAllCustomers(): Observable<Array<any>>{
     return this.http.get<Array<any>>(this.url)
   }
 }

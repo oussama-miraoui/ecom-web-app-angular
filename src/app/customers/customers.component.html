@@ -1,7 +1,7 @@
 <div class="container mt-3">
     <div class="card">
     <div class="card-header">
-        Products
+        Customers
     </div>
     <div class="card-body">
       <ng-template #errorOrLoading>
@@ -16,22 +16,25 @@
           </div>
         </ng-template>
       </ng-template>
-
-      <table class="table" *ngIf="products; else errorOrLoading">
+      
+      <table class="table" *ngIf="customers; else errorOrLoading ">
         <thead>
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
+            <th>Email</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products._embedded.products">
-              <td>{{ product.id }}</td>
-              <td>{{ product.name }}</td>
-              <td>{{ product.price }}</td>
-              <td>{{ product.quantity }}</td>
+          <tr *ngFor="let customer of customers._embedded.customers">
+              <td>{{ customer.id }}</td>
+              <td>{{ customer.name }}</td>
+              <td>{{ customer.email }}</td>
+              <td>
+                <button class="btn btn-success" (click)="handleGetOrders(customer)">
+                    Orders
+                </button>
+              </td>
           </tr>
         </tbody>
       </table>
