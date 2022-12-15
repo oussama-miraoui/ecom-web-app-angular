@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CustomerService } from '../services/customer.service';
 
 @Component({
@@ -12,7 +13,10 @@ export class CustomersComponent {
   customers: any
   errorMessage!: string
 
-  constructor(private http:HttpClient, private customerService:CustomerService){}
+  constructor(private http:HttpClient, 
+    private customerService:CustomerService,
+    private router:Router
+    ){}
 
   ngOnInit() : void{  
     this.handleGetAllCustomer();
@@ -41,5 +45,17 @@ export class CustomersComponent {
   }
 
   handleGetOrders(customer: any) {
+   /* this.http.get("http://localhost:8888/BILLING-SERVICE/bills/search/byCustomerId?customerId="+customerId+"&projection=fullBill")
+    .subscribe({
+      next:data=>{
+        console.log("customerId", customerId);
+        console.log(data);
+      },
+      error:err=>{
+        console.log(err)
+      }
+    })*/
+    this.router.navigateByUrl("/orders/"+customer.id)
+    
   }
 }

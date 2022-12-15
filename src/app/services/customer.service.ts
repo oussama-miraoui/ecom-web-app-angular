@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class CustomerService {
 
   url:string="http://localhost:8888/CUSTOMER-SERVICE/customers"
+  
   constructor(private http:HttpClient) { }
 
   getAllCustomers(): Observable<Array<any>>{

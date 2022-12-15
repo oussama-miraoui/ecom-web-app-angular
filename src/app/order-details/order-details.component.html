@@ -1,0 +1,66 @@
+<div class="container mt-3">
+      
+    <ng-template #errorOrLoading>
+        <div class="alert alert-danger" *ngIf="errorMessage; else loading">
+            {{errorMessage}}
+        </div>
+        <ng-template #loading>
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </ng-template>
+    
+    <div class="row" *ngIf="products; else errorOrLoading">
+      <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                Order {{ orderId }} Details
+            </div>
+            <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item">Order Date : <strong>{{ products.billingDate | date : "YYY-MM-dd" }}</strong></li>
+            <li class="list-group-item">Customer's ID : <strong>{{ products.customer.id }}</strong></li>
+            <li class="list-group-item">Customer's Name : <strong>{{ products.customer.name }}</strong></li>
+            <li class="list-group-item">Customer's Email : <strong>{{ products.customer.email }}</strong></li>
+        </ul>
+        </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                Ordered items
+            </div>
+            <div class="card-body">
+                <table class="table" *ngIf="products; else errorOrLoading ">
+                    <thead>
+                      <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let product of products.productItems">
+                        <td>{{ product.productId }}</td>
+                        <td>{{ product.productName }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.price }}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="3" class="text-end">Total: </td>
+                        <td class="text-success"><strong>{{products.total}} MAD</strong></td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+      
+    </div>
+</div>
+</div>
